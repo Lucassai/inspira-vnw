@@ -1,14 +1,29 @@
 <script setup>
-import { IconHeart } from '@tabler/icons-vue'
-defineProps(['imagem'])
+import { IconHeart, IconHeartFilled } from '@tabler/icons-vue'
+
+defineProps(['imagem', 'alt'])
+
+const heartClicked = () => {
+  const heartIcon = event.currentTarget.querySelector('#heartIcon')
+  const heartFilledIcon = event.currentTarget.querySelector('#heartFilledIcon')
+
+  if (heartIcon.style.display !== 'none') {
+    heartIcon.style.display = 'none'
+    heartFilledIcon.style.display = 'block'
+  } else {
+    heartIcon.style.display = 'block'
+    heartFilledIcon.style.display = 'none'
+  }
+}
 </script>
 
 <template>
-  <div class="card">
+  <div @click="heartClicked" class="card">
     <button>
-      <IconHeart color="#e1306c" size="24" />
+      <IconHeart id="heartIcon" color="#e1306c" display="block" />
+      <IconHeartFilled id="heartFilledIcon" color="#e1306c" display="none" />
     </button>
-    <img :src="imagem" alt="imagem de teste" />
+    <img :src="imagem" :alt="alt" />
   </div>
 </template>
 
@@ -22,6 +37,11 @@ defineProps(['imagem'])
   align-items: center;
   overflow: hidden;
   border-radius: 1rem;
+}
+.card:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
 }
 
 img {

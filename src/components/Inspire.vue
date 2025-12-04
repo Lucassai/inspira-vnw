@@ -1,45 +1,24 @@
 <script setup>
 import Card from './Card.vue'
+
+const cards = Array.from({ length: 20 }, (_, i) => ({
+  id: 300 + i,
+  imagem: `https://picsum.photos/id/${500 + i}/1920/1080`,
+}))
 </script>
 
 <template>
   <div id="Inspire">
     <h2>Inspire-se</h2>
     <div id="imagens">
-      <Card
-        imagem="https://images3.alphacoders.com/135/thumbbig-1354394.webp"
-      />
-      <Card
-        imagem="https://images8.alphacoders.com/135/thumbbig-1354384.webp"
-      />
-      <Card
-        imagem="https://images4.alphacoders.com/135/thumbbig-1356514.webp"
-      />
-      <Card imagem="https://images.alphacoders.com/135/thumbbig-1354383.webp" />
-      <Card
-        imagem="https://images7.alphacoders.com/134/thumbbig-1343992.webp"
-      />
-      <Card
-        imagem="https://images8.alphacoders.com/134/thumbbig-1348243.webp"
-      />
-      <Card imagem="https://images.alphacoders.com/135/thumbbig-1358237.webp" />
-      <Card imagem="https://images.alphacoders.com/135/thumbbig-1357998.webp" />
-      <Card
-        imagem="https://images6.alphacoders.com/136/thumbbig-1365621.webp"
-      />
-      <Card imagem="" />
-      <Card imagem="" />
-      <Card imagem="" />
-      <Card imagem="" />
-      <Card imagem="" />
-      <Card imagem="" />
+      <Card v-for="card in cards" :key="card.id" :imagem="card.imagem" />
     </div>
   </div>
 </template>
 
 <style scoped>
 #Inspire {
-  width: fit-content;
+  width: 100%;
   font-family: 'Poppins';
   margin: 40px 20px;
   h2 {
@@ -50,5 +29,23 @@ import Card from './Card.vue'
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
+}
+
+@media (max-width: 1200px) {
+  #imagens {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  #imagens {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  #imagens {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
